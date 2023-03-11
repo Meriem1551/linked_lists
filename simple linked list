@@ -1,0 +1,31 @@
+#include<stdio.h>
+struct node{
+int data;
+struct node *next;
+};
+void display_a_list(struct node*pointer){
+while(pointer!=NULL){
+printf("-> %d ",pointer->data);
+pointer=pointer->next;
+}
+
+}
+int main(){
+int n,i;
+struct node *pointer1;
+struct node *pointer2;
+struct node *pointer3;
+pointer1=(struct node*)malloc(sizeof(struct node));
+pointer2=(struct node*)malloc(sizeof(struct node));
+pointer3=(struct node*)malloc(sizeof(struct node));
+printf("enter the first data");
+scanf("%d",&pointer1->data);
+pointer1->next=pointer2;
+printf("enter the first data");
+scanf("%d",&pointer2->data);
+pointer2->next=pointer3;
+printf("enter the first data");
+scanf("%d",&pointer3->data);
+pointer3->next=NULL;
+display_a_list(pointer1);
+}
