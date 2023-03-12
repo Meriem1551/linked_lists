@@ -1,0 +1,39 @@
+#include <iostream>
+#include<graphics.h>
+int main(){
+int gd=DETECT,gm;
+initgraph(&gd,&gm,(char*)"");
+
+line(200,50,200,429);
+line(439,50,439,429);
+line(50,150,589,150);
+line(50,329,589,329);
+printf("           PRESS THE LEFT BUTTON FOR RED CIRCLE AND RIGHT BUTTON FOR THE GREEN ONE          ");
+POINT cursorPosition;
+int mX,mY;
+while(1){
+GetCursorPos(&cursorPosition);
+mX=cursorPosition.x;
+mY=cursorPosition.y;
+
+if(GetAsyncKeyState(VK_LBUTTON)){
+circle(mX,mY,50);
+setfillstyle(SOLID_FILL,RED);
+floodfill(mX,mY,WHITE);
+delay(100);
+}
+else{if(GetAsyncKeyState(VK_RBUTTON)){
+circle(mX,mY,50);
+setfillstyle(SOLID_FILL,GREEN);
+floodfill(mX,mY,WHITE);
+delay(100);
+
+}
+}
+ 
+}
+
+getch();
+closegraph();
+
+}
