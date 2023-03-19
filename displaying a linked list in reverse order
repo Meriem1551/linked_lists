@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct nodes {
+	int number;
+	struct nodes* next;
+}*head;
+void create(int);
+void display(struct nodes*head);
+int main() {
+	int n;
+	printf("\t this program about linked list\n");
+	printf("how many nodes do you want to add");
+	scanf("%d", &n);
+	create(n);
+	
+}
+void create(int node) {
+	struct nodes* p = NULL, * q = NULL, * head = NULL;
+	int i;
+	p = (struct nodes*)malloc(sizeof(struct nodes));
+	scanf("%d", &p->number);
+	p->next = NULL;
+	head = p;
+	q = head;
+	for (i = 1; i < node; i++) {
+		p = (struct nodes*)malloc(sizeof(struct nodes));
+		scanf("%d", &p->number);
+		p->next = NULL;
+		q->next = p;
+		q = q->next;
+
+	}
+	display(head);
+	
+}
+void display(struct nodes *pointer){
+	if(pointer == NULL) {
+	return 0;
+		}
+		else{
+			display(pointer->next);
+		printf(" %d->", pointer->number);
+}
+}
