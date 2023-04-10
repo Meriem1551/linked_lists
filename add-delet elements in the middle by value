@@ -1,0 +1,143 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct nodes{
+    int data;
+    struct nodes *next;
+}*head;
+
+void create_LL(int);
+void choice(struct nodes* head);
+void adding(struct nodes *head,int,int);
+void deleting(struct nodes *head,int);
+void display(struct nodes *head);
+int main(){
+    struct nodes *p=NULL;
+    int n;
+    printf("enter how many nodes you want to create");
+    scanf("%d",&n);
+       create_LL(n);
+}
+void create_LL(int node){
+    int i;
+    struct nodes *pointer=NULL,*link=NULL,*head=NULL;
+    pointer=(struct nodes*)malloc(sizeof(struct nodes));
+    scanf("%d",&pointer->data);
+      head=pointer;
+      link=head;
+    for(i=1;i<node;i++){
+         pointer=(struct nodes*)malloc(sizeof(struct nodes));
+    scanf("%d",&pointer->data);
+    pointer->next=NULL;
+    link->next=pointer;
+    link=link->next;
+    }
+    
+    choice(head);
+}
+void choice(struct nodes *pointer){
+	int ch,val,value;
+	printf("enter the value you want to add befor or after it or delet itself,after,before it ");
+	scanf("%d",&val);
+	printf("for adding enter 1 for deleting enter 2");
+	scanf("%d",&ch);
+	switch(ch){
+		case 1:
+			 printf("enter the value you want to add");
+			 scanf("%d",&value);
+			 adding(pointer,value,val);
+		break;
+		case 2:
+		deleting(pointer,val);
+			break;
+		
+	}
+}
+void adding(struct nodes *p,int value,int val){
+	int i;
+	printf("enter 1 for befor and 2 for after ");
+	scanf("%d",&i);
+	if(i==1){
+		struct nodes *q=p;
+		struct nodes *ptr=NULL,*l=NULL;
+	while(q->data!=val){
+		ptr=q;
+		q=q->next;
+	}
+	 l=(struct nodes * )malloc(sizeof(struct nodes));
+	 l->data=value;
+	 l->next=q;
+	 ptr->next=l;
+	}
+	else{
+		struct nodes *q=p;
+		struct nodes *ptr=p,*l=NULL;
+		ptr=ptr->next;
+	while(q->data!=val){
+		ptr=ptr->next;
+		q=q->next;
+	}
+		 l=(struct nodes * )malloc(sizeof(struct nodes));
+          	 l->data=value;
+           l->next=ptr;
+           q->next=l;
+}
+display(p);
+}
+void deleting(struct nodes*p,int val){
+		struct nodes *q,*ptr,*l;
+	int i;
+	printf("for: deleting the value enter 1 the element befor enter 2 the element after enter 3");
+	scanf("%d",&i);
+	switch(i){
+		case 1:
+			q=p;
+			ptr=NULL;
+			while(q->data!=val){
+				ptr=q;
+				q=q->next;
+			}
+			ptr->next=q->next;
+			free(q);
+			break;
+		case 2:
+			q=p,ptr=NULL;
+			while(q->data!=val){
+				l=ptr;
+				ptr=q;
+				q=q->next;
+			}
+			if(ptr==p){
+				p=q;
+				free(ptr);
+			}
+			else{
+				l->next=q;
+				free(ptr);
+			}
+			break;
+		case 3:
+		q=p;
+		ptr=p;
+		ptr=ptr->next;
+			while(q->data!=val){
+				ptr=ptr->next;
+				q=q->next;
+			}
+			if(ptr->next==NULL){
+				q->next=NULL;
+				free(ptr);
+			}
+			else{
+				q->next=ptr->next;
+				free(ptr);
+			}
+			break;
+	}
+	display(p);
+}
+void display(struct nodes *ptr){
+    while(ptr!=NULL){
+        printf("%d",ptr->data);
+        ptr=ptr->next;
+    }
+}
