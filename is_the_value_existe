@@ -1,0 +1,60 @@
+
+	#include<stdio.h>
+#include<stdlib.h>
+struct nodes {
+    int data;
+    struct nodes *next;
+}*head;
+
+void create_LL(int,int);
+void Is_this_value_existe(struct nodes*head,int,int);
+void display(int,int);
+int main(){
+    struct nodes *p=NULL;
+    int n,m,j;
+    do{
+    printf("\t                 enter how many nodes you want to create : ");
+    scanf("%d",&n);
+       create_LL(n,m);
+       printf("\n enter 1 to continue else 0");
+       scanf("%d",&j);
+	   }
+	   while(j!=0);  
+}
+void create_LL(int node,int the_searched_value){
+    int i,the_wanted_position;			
+    struct nodes *pointer=NULL,*link=NULL,*head=NULL;
+    pointer=(struct nodes*)malloc(sizeof(struct nodes));
+    scanf("%d",&pointer->data);
+      head=pointer;
+      link=head;
+    for(i=1;i<node;i++){
+         pointer=(struct nodes*)malloc(sizeof(struct nodes));
+    scanf("%d",&pointer->data);
+    pointer->next=NULL;
+    link->next=pointer;
+    link=link->next;
+    } 
+    printf("which data you are looking for? ");
+    scanf("%d",&the_searched_value);
+Is_this_value_existe(head,the_searched_value,node);
+}
+void Is_this_value_existe(struct nodes *pointer,int the_searched_value,int node){
+	struct nodes *ptr=pointer;
+	int i=0;
+		while(ptr!=NULL){
+		  if(ptr->data!=the_searched_value){
+			i++;
+	       }
+	       ptr=ptr->next;
+       	}
+	display(i,node);
+}
+void display(int i,int node){
+	if(i==node){
+		printf("this value isn't existe");
+	}
+	else{
+		printf("it's existe");
+	}
+}
