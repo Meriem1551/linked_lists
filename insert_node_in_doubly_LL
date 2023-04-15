@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Nodes{
+	int data;
+	struct Nodes *next;
+	struct Nodes *previous;
+}*head;
+int get_num_nodes();
+struct Nodes* create_doubly_LL(int);
+struct Nodes* insert_node_at_beg(struct Nodes *head);
+void display(struct Nodes *head);
+int main(){
+	printf("    ****this is Doubly LINKED_LIST***\n");
+int a;
+struct Nodes *ptr1,*ptr2;
+a=get_num_nodes();
+ptr1=create_doubly_LL(a);
+ptr2=insert_node_at_beg(ptr1);
+	display(ptr2);
+}
+int get_num_nodes(int num_nodes){
+	printf("    how many nodes do you want to create? ");
+	scanf("%d",&num_nodes);
+	return num_nodes;
+}
+struct Nodes* create_doubly_LL(int num_nodes){
+	int i;
+	struct Nodes *head=NULL,*p=NULL,*link=NULL;
+	p=(struct Nodes*)malloc(sizeof(struct Nodes));
+	printf("   enter the data: ");
+	scanf("%d",&p->data);
+	p->next=NULL;
+	p->previous=NULL;
+	head=p;
+	link=head;
+	for(i=1;i<num_nodes;i++){
+		 p=(struct Nodes*)malloc(sizeof(struct Nodes));
+	     scanf("%d",&p->data);
+	     p->next=NULL;
+	     p->previous=link;
+	     link->next=p;
+	     link=link->next;
+	}
+	return head;
+}
+struct Nodes *insert_node_at_beg(struct Nodes *start){
+	struct Nodes *ptr=NULL;
+	ptr=(struct Nodes*)malloc(sizeof(struct Nodes));
+	printf("    enter the value you want to add it: ");
+	scanf("%d",&ptr->data);
+	ptr->next=start;
+	ptr->previous=NULL;
+	start->previous=ptr;
+	start=ptr;
+	return start;
+}
+void display(struct Nodes *pointer){
+	struct Nodes *q=pointer;
+	while(q!=NULL){
+		printf("%d ->",q->data);
+		q=q->next;
+	}
+}
