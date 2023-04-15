@@ -1,0 +1,111 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct MyArray{
+	int array[6];
+};
+struct MyList{
+	int num;
+	struct MyList *next;
+}*head;
+void choice();
+struct MyArray getArray();
+void ConvertArrayToList(struct MyArray);
+void display(struct MyList *head);
+void CreateLinkedList(int);
+void ConvertListToArray(struct MyList *head);
+void display2(struct MyArray);
+int main(){
+	choice();
+}
+void choice(){
+	int choice,node=6;
+	struct MyArray numbers;
+	char c_s;
+	do{
+	printf(" \nfrom Array to LinkedList tap 1 .\n");
+	printf(" \nfrom LinkedList to Array tap 2 .");
+  scanf("%d",&choice);
+  switch(choice){
+  	case 1:
+       numbers=getArray();
+       ConvertArrayToList(numbers);
+    break;
+    case 2:
+    	CreateLinkedList(node);
+    break;
+}
+printf("you want to continue? tap y for yes and n for no ");
+scanf("%s",&c_s);
+}
+while(c_s!='n');
+}
+struct MyArray getArray(){
+	struct MyArray Mynum;
+	int i;
+	printf("enter the numbers: ");
+	for(i=0;i<6;i++){
+		scanf("%d",&Mynum.array[i]);
+	}
+	return Mynum;
+}
+void ConvertArrayToList(struct MyArray Mynum){
+	struct MyList *pointer=NULL,*head=NULL,*link=NULL;
+	int i;
+	pointer=(struct MyList*)malloc(sizeof(struct MyList));
+	pointer->num=Mynum.array[0];
+	head=pointer;
+	link=head;
+	i=1;
+	while(i<6){
+			pointer=(struct MyList*)malloc(sizeof(struct MyList));
+            pointer->num=Mynum.array[i];
+            pointer->next=NULL;
+            link->next=pointer;
+            link=link->next;
+            i++;
+	}
+	display(head);
+}
+void display(struct MyList *p){
+	struct MyList *q=p;
+	printf("this is you LinkedList: ");
+	while(q!=NULL){
+		printf("%d->",q->num);
+		q=q->next;
+	}
+}
+void CreateLinkedList(int num_node){
+    int i;			
+    struct MyList *pointer=NULL,*link=NULL,*head=NULL;
+    pointer=(struct MyList*)malloc(sizeof(struct MyList));
+    printf("enter the data ");
+    scanf("%d",&pointer->num);
+      head=pointer;
+      link=head;
+    for(i=1;i<num_node;i++){
+         pointer=(struct MyList*)malloc(sizeof(struct MyList));
+    scanf("%d",&pointer->num);
+    pointer->next=NULL;
+    link->next=pointer;
+    link=link->next;
+    }
+        	ConvertListToArray(head);
+}
+void ConvertListToArray(struct MyList *p){
+	struct MyList *q=p;
+	struct MyArray number;
+	int i=0;
+	while(q!=NULL){
+		number.array[i]=q->num;
+		q=q->next;
+		i++;
+	}
+	display2(number);
+}
+void display2(struct MyArray MyNumber){
+	int i;
+	printf("this is your ARRAY: ");
+	for(i=0;i<6;i++){
+		printf("|%d",MyNumber.array[i]);
+	}
+}
