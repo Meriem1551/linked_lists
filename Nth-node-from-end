@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct ListNodes{
+int number;
+struct ListNodes *next;
+struct ListNodes *previous;
+}*head,*tail;
+typedef struct ListNodes Nodes;
+Nodes *createDoubleList(int);
+int getInput();
+int findDataFromEnd(Nodes *head,int,int);
+void displayOutput(int);
+int main(){
+    int num,node;
+    Nodes *h=NULL;
+    printf("enter number of nodes ");
+    scanf("%d",&num);
+    h=createDoubleList(num);
+    printf("enter the nth node ");
+    scanf("%d",&node);
+    int result=findDataFromEnd(h,node,num);
+    displayOutput(result);
+}
+Nodes *createDoubleList(int numNodes){
+    Nodes *p=NULL,*link=NULL;
+    p=(Nodes *)malloc(sizeof(Nodes));
+    p->number=getInput();
+    p->next=NULL;
+    p->previous=NULL;
+    head=p;
+    link=p;
+    for(int i=1;i<numNodes;i++){
+        p=(Nodes *)malloc(sizeof(Nodes));
+    p->number=getInput();
+    p->next=NULL;
+    p->previous=link;
+    link->next=p;
+    link=p;
+    }
+    tail=link;
+    return tail;
+}
+int getInput(){
+    int num;
+    printf("enter data ");
+    scanf("%d",&num);
+    return num;
+}
+int findDataFromEnd(Nodes *tail,int nthNode,int numNode){
+    Nodes *pointer=tail;
+        if(nthNode>numNode){
+            return -1;
+        }
+        else{
+           
+           while (nthNode!=1){
+            pointer=pointer->previous;
+            nthNode--;
+           }
+           return pointer->number;
+        }
+    }
+
+void displayOutput(int result){
+    printf("the result is: %d",result);
+}
